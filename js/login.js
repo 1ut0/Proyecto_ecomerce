@@ -12,6 +12,11 @@ if(email.length == '' || pass == ''){
     alert("Ingrese todos los datos requeridos")
 } else{
     redirection()
+    saveLocalStorage(email)
 }
 })
+
+function saveLocalStorage(email){
+    localStorage.setItem('usuario', JSON.stringify(email));
+}
     
