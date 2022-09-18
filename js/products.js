@@ -4,9 +4,8 @@ function showProducts(array){
   let htmlContentToAppend = "";
   for(let i = 0; i < array.products.length; i++){
     let catsCars = array.products[i];
-    console.log(catsCars)
     htmlContentToAppend += `
-        <div class="list-group-item list-group-item-action">
+        <div onclick="setItem(`+catsCars.id+`)" class="list-group-item list-group-item-action cursor-active">
             <div class="row">
                 <div class="col-3">
                     <img src="` + catsCars.image + `" alt="product image" class="img-thumbnail">
@@ -39,16 +38,18 @@ document.addEventListener("DOMContentLoaded", function(e){
     });
 });
 
+function setItem(id) {
+    localStorage.setItem("prodID", JSON.stringify(id));
+    window.location = 'product-info.html';
+}
+
 //funcion para filtrar por menor a mayor precio
 document.getElementById("sortAsc").addEventListener("click", function(){
     let resultado = products.products
     resultado.sort((a, b) =>{
         return a.cost - b.cost
     })
-
-    console.log(resultado)
     recargar(resultado)
-
     })
 
     document.getElementById("sortDesc").addEventListener("click", function() {
@@ -56,8 +57,6 @@ document.getElementById("sortAsc").addEventListener("click", function(){
         resultado.sort((a, b) =>{
             return b.cost - a.cost
         })
-
-        console.log(resultado)
         recargar(resultado)
     })
 
@@ -66,7 +65,6 @@ document.getElementById("sortAsc").addEventListener("click", function(){
         resultado.sort((a, b) =>{
             return b.soldCount - a.soldCount
         })
-        console.log(resultado)
         recargar(resultado)
     })
 
@@ -74,10 +72,13 @@ document.getElementById("sortAsc").addEventListener("click", function(){
 document.getElementById("rangeFilterCount").addEventListener("click", function(){
     minCount = document.getElementById("rangeFilterCountMin").value;
     maxCount = document.getElementById("rangeFilterCountMax").value;
+
     let resultado = products.products.filter(product => product.cost >= minCount);
-    resultado = products.products.filter(product => product.cost <= maxCount);
-    console.log(resultado)
     recargar(resultado)
+
+    let resultado2 = products.products.filter(product => product.cost <= maxCount);
+    recargar(resultado2)
+    
 })
 
 
@@ -92,9 +93,10 @@ document.getElementById("clearRangeFilter").addEventListener("click", function()
     resultado.sort((a, b) =>{
         return a.id - b.id
     })
-    console.log(resultado)
     recargar(resultado)
 });
+
+
 
 //funcion para recargar los objetos segun un array
 function recargar(a){
@@ -102,9 +104,8 @@ function recargar(a){
 
     for(let i = 0; i < a.length; i++){
         let catsCars = a[i];
-        console.log(catsCars)
         htmlContentToAppend += `
-            <div class="list-group-item list-group-item-action">
+            <div onclick="setCatId(`+catsCars.id+`)" class="list-group-item list-group-item-action">
                 <div class="row">
                     <div class="col-3">
                         <img src="` + catsCars.image + `" alt="product image" class="img-thumbnail">
