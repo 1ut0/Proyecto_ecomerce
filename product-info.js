@@ -83,7 +83,8 @@ document.addEventListener("DOMContentLoaded", ()=>{
                         htmlContentToAppend +=`
                         <li class="media border list-group-item">
                             <div class="media-body">
-                                <label class="mt-0"><strong>`+comentario.user+`</strong>
+                                <label class="mt-0">
+                                    <strong>`+comentario.user+`</strong>
                                     <span class="mute">-`+comentario.dateTime+`</span>
                                     <span>-`+stars+`</span>
                                 </label>

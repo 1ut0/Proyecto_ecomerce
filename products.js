@@ -18,7 +18,6 @@ function showProducts(array){
                         </div>
                         <small class="text-muted">` +catsCars.soldCount+ ` artículos</small> 
                     </div>
-
                 </div>
             </div>
         </div>
